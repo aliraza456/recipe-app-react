@@ -19,6 +19,56 @@ You may also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+
+=========================================
+
+Cache Strategy:
+
+The app uses a CacheFirst strategy for caching API responses. This means the service worker first tries to serve cached responses before fetching from the network. Cached responses are stored for 24 hours and up to 50 entries are stored.
+Running the App:
+
+Use npm start to run the app locally. The service worker will be activated automatically.
+Testing the Caching:
+
+Open the browser's Developer Tools and go to the Network tab.
+Request a recipe for the first time. You should see a network request to https://dummyjson.com/recipes, and the response should be cached by the service worker.
+Request the same recipe again. The service worker should now serve the recipe from the cache instead of making another network request.
+You can monitor the caching activity in the Application > Cache Storage section of the Developer Tools.
+Clearing Cache and Service Worker:
+
+To test the caching behavior from scratch, clear the Cache Storage in Developer Tools > Application > Cache Storage.
+You can also unregister the service worker from Developer Tools > Application > Service Workers and restart the app.
+Deployment:
+
+For production deployment, run npm run build. The service worker and caching logic will work as expected in the production build.
+Common Issues and Fixes
+Multiple Network Requests: If you notice multiple API calls for the same recipe, ensure that the service worker is properly installed and that React components are checking the cache before making network requests.
+
+Cache Expiration: Cached responses are kept for 24 hours. After this period, the service worker will automatically fetch fresh data from the network.
+
+How to Test:
+First Load: The first time you select a recipe, a network request will be made and the response will be cached.
+Subsequent Loads: When you select the same recipe again, it will be served from the cache, reducing network requests.
+Further Reading:
+Workbox Documentation
+Create React App Documentation
+
+Clearing Cache and Unregistering Service Worker
+To clear cached data, local storage, or session storage, follow these steps:
+
+Delete Cache in Cache Storage:
+Open your browser’s Developer Tools and navigate to the Application tab. Under Cache Storage, find the specific cache (in this case, recipes-api-cache) and delete it. This will clear all cached API responses stored by the service worker.
+
+Clear Local Storage and Session Storage:
+In the Developer Tools under the Application tab, you will also find Local Storage and Session Storage. You can select these and manually delete any stored data if needed.
+
+Unregister the Service Worker:
+To remove the service worker, go to Developer Tools > Application > Service Workers. There, you can unregister the service worker. This will stop the service worker from intercepting network requests and caching responses. After unregistering, refresh the page to reload the app without the service worker.
+
+
+--------------------------------------------------------
+
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
@@ -68,3 +118,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+

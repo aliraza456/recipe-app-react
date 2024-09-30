@@ -3,12 +3,13 @@ import "./App.css";
 import RecipeDropdown from "./Components/RecipeDropdown";
 import RecipeDetails from './Components/RecipeDetails';
 
-
 function App() {
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 
   const handleSelectRecipe = (recipeId) => {
-    setSelectedRecipeId(recipeId);
+    if (recipeId !== selectedRecipeId) {
+      setSelectedRecipeId(recipeId); // Only update if recipeId changes
+    }
   };
 
   return (
