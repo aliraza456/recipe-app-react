@@ -1,13 +1,10 @@
-/* eslint-disable */
-/* eslint-disable no-restricted-globals */
-
-// Import Workbox from the CDN
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.5.4/workbox-sw.js');
 
 if (workbox) {
   console.log('Workbox is loaded');
 
-  // Use CacheFirst strategy for recipes
+  workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
+
   workbox.routing.registerRoute(
     ({ url }) => {
       return url.origin === 'https://dummyjson.com' && url.pathname.startsWith('/recipes');
@@ -16,11 +13,11 @@ if (workbox) {
       cacheName: 'recipes-api-cache',
       plugins: [
         new workbox.cacheableResponse.CacheableResponsePlugin({
-          statuses: [0, 200], // Only cache successful responses
+          statuses: [0, 200], 
         }),
         new workbox.expiration.ExpirationPlugin({
-          maxEntries: 50, // Limit the number of entries in the cache
-          maxAgeSeconds: 24 * 60 * 60, // Cache for 24 hours
+          maxEntries: 50, 
+          maxAgeSeconds: 24 * 60 * 60, 
         }),
       ],
     })

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './RecipeDetails.css';
 
-// Helper function to check cache for recipe data
 const getCachedRecipe = async (recipeId) => {
   const cache = await caches.open('recipes-api-cache');
   const cachedResponse = await cache.match(`https://dummyjson.com/recipes/${recipeId}`);
@@ -16,24 +15,22 @@ const getCachedRecipe = async (recipeId) => {
 const RecipeDetails = ({ recipeId }) => {
   const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState(null);
-  const fetchInProgress = useRef(false); // Prevent multiple fetches
+  const fetchInProgress = useRef(false); 
 
   useEffect(() => {
-    if (fetchInProgress.current) return; // Prevent multiple fetches
+    if (fetchInProgress.current) return; 
 
     const fetchRecipe = async () => {
-      // Set flag to true to prevent multiple fetches
-      fetchInProgress.current = true;
 
-      // Check if the recipe is cached first
+      fetchInProgress.current = true;
       const cachedRecipe = await getCachedRecipe(recipeId);
       if (cachedRecipe) {
         setRecipe(cachedRecipe);
-        fetchInProgress.current = false; // Reset fetch flag after fetching
+        fetchInProgress.current = false; 
         return;
       }
 
-      // Fetch from network if not cached
+    
       console.log(`Fetching recipe ${recipeId} from network`);
       try {
         const response = await fetch(`https://dummyjson.com/recipes/${recipeId}`);
@@ -41,12 +38,12 @@ const RecipeDetails = ({ recipeId }) => {
           throw new Error(`Network response was not ok (${response.status})`);
         }
         const data = await response.json();
-        setRecipe(data); // Update state with the fetched recipe
-        fetchInProgress.current = false; // Reset fetch flag after fetching
+        setRecipe(data); 
+        fetchInProgress.current = false; 
       } catch (err) {
         console.error('Error fetching recipe details:', err);
         setError('Failed to load recipe details.');
-        fetchInProgress.current = false; // Reset fetch flag on error
+        fetchInProgress.current = false; 
       }
     };
 

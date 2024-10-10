@@ -1,4 +1,4 @@
-/* Style the main container of the recipe details */
+
 .recipe-container {
   margin: 20px;
   padding: 20px;
@@ -10,7 +10,6 @@
   margin-right: auto;
 }
 
-/* Recipe title styling */
 .recipe-container h2 {
   font-size: 28px;
   color: #333;
@@ -18,7 +17,6 @@
   margin-bottom: 16px;
 }
 
-/* Ingredients list styling */
 .recipe-container p {
   margin-bottom: 16px;
   line-height: 1.6;
@@ -30,7 +28,7 @@
   font-weight: bold;
 }
 
-/* Styling for the ingredient list */
+
 .recipe-container .ingredients-list {
   padding: 8px 16px;
   background-color: #eaf0f6;
@@ -38,7 +36,7 @@
   font-size: 16px;
 }
 
-/* Difficulty styling */
+
 .recipe-container .difficulty {
   padding: 4px 10px;
   background-color: #f4f4f4;
@@ -48,7 +46,7 @@
   color: #777;
 }
 
-/* Make sure the text is aligned nicely */
+
 .recipe-container .instructions {
   padding-top: 10px;
   line-height: 1.6;

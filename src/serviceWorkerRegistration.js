@@ -1,13 +1,11 @@
-// src/serviceWorkerRegistration.js
 
 export function register() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/custom-service-worker.js')
+      navigator.serviceWorker.register('/custom-service-worker.js') // Correct path
         .then(registration => {
           console.log('Service Worker registered with scope:', registration.scope);
 
-          // Listen for updates to the service worker
           registration.onupdatefound = () => {
             const installingWorker = registration.installing;
             if (installingWorker == null) {
@@ -16,10 +14,8 @@ export function register() {
             installingWorker.onstatechange = () => {
               if (installingWorker.state === 'installed') {
                 if (navigator.serviceWorker.controller) {
-                  // New content is available; notify the user
                   alert('New updates are available. Please refresh the page.');
                 } else {
-                  // Content is cached for offline use
                   console.log('Content is cached for offline use.');
                 }
               }
@@ -40,7 +36,6 @@ export function unregister() {
     navigator.serviceWorker.ready
       .then(registration => {
         registration.unregister();
-        console.log('Service Worker unregistered');
       })
       .catch(error => {
         console.error('Error unregistering Service Worker:', error);

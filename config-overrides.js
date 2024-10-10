@@ -1,4 +1,3 @@
-// config-overrides.js
 const { override } = require('customize-cra');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
@@ -8,11 +7,10 @@ module.exports = override((config) => {
       (plugin) => plugin.constructor.name !== 'GenerateSW'
     );
 
-   
     config.plugins.push(
       new WorkboxWebpackPlugin.InjectManifest({
-        swSrc: './src/custom-service-worker.js',
-        swDest: 'service-worker.js',
+        swSrc: './public/custom-service-worker.js', 
+        swDest: './src/serviceWorkerRegistration.js', 
       })
     );
   }
